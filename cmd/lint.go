@@ -372,6 +372,8 @@ func getReporter(format string, outputWriter io.Writer) (reporter.Reporter, erro
 		return reporter.NewFestiveReporter(outputWriter), nil
 	case formatSarif:
 		return reporter.NewSarifReporter(outputWriter), nil
+	case formatJunit:
+		return reporter.NewJUnitReporter(outputWriter), nil
 	default:
 		return nil, fmt.Errorf("unknown format %s", format)
 	}
@@ -396,8 +398,8 @@ func getWriterForOutputFile(filename string) (io.Writer, error) {
 }
 
 func formatError(format string, err error) error {
-	// currently, JSON and SARIF will get the same generic JSON error format
-	if format == formatJSON || format == formatSarif {
+	// currently, JSON, SARIF, and JUnit will get the same generic JSON error format
+	if format == formatJSON || format == formatSarif || format == formatJunit {
 		bs, err := json.MarshalIndent(map[string]interface{}{
 			"errors": []string{err.Error()},
 		}, "", "  ")
