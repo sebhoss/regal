@@ -462,7 +462,7 @@ func (tr JUnitReporter) Publish(_ context.Context, r report.Report) error {
 		for _, violation := range violationsPerFile[file] {
 			testsuite.AddTestcase(junit.Testcase{
 
-				Name:      fmt.Sprintf("%s/%s: %s", violation.Category, violation.Title, violation.Level),
+				Name:      fmt.Sprintf("%s/%s: %s", violation.Category, violation.Title, violation.Description),
 				Classname: violation.Location.String(),
 				Failure: &junit.Result{
 					Message: fmt.Sprintf("%s. To learn more, see: %s", violation.Description, getDocumentationURL(violation)),
