@@ -467,7 +467,7 @@ func (tr JUnitReporter) Publish(_ context.Context, r report.Report) error {
 				Failure: &junit.Result{
 					Message: fmt.Sprintf("%s. To learn more, see: %s", violation.Description, getDocumentationURL(violation)),
 					Type:    violation.Level,
-					Data: fmt.Sprintf("%s: %s\nCategory: %s\nTitle: %s\nFile: %s\nRow: %v\nColumn: %v",
+					Data: fmt.Sprintf("%s: %s\nCategory: %s\nRule: %s\nFile: %s\nRow: %v\nColumn: %v",
 						violation.Level, violation.Description, violation.Category, violation.Title, file, violation.Location.Row, violation.Location.Column),
 				},
 			})
